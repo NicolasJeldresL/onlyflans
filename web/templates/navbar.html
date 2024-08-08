@@ -1,0 +1,12 @@
+<nav class="container">
+    <ul class="nav justify-content-center">
+        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a></li>
+        {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+        {% endif %}
+    </ul>
+</nav>

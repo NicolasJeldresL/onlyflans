@@ -1,0 +1,41 @@
+body {
+    border: 5px solid black;
+}
+
+header {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav {
+    color: white;
+    background-color: rgb(65, 107, 118);
+    border-top: 5px solid rgb(65, 107, 118);
+    border-bottom: 5px solid rgb(65, 107, 118);
+    padding: 10px 0;
+}
+
+nav .card {
+    background-color: white;
+    border: none;
+}
+
+nav .nav-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+footer {
+    background-color: rgb(65, 107, 118);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+    nav .card {
+        margin-bottom: 1rem;
+    }
+}
