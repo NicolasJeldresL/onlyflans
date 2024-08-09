@@ -1,9 +1,20 @@
 from django.shortcuts import render
 
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 
 def index(request):
-    return render(request, 'index.html')
+    postres = [
+         {"name": "Tarta de chocolate", "description": "Deliciosa tarta de chocolate.", "url": "img/tartachocolate.jpg"},
+        {"name": "Flan de Vainilla", "description": "Suave flan de vainilla.", "url": "img/flanvainilla.jpg"},
+        {"name": "Tiramisu", "description": "Exquisito postre para el hogar.", "url": "img/tiramisu.jpg"},
+    ]
+    
+    context = {
+        'message': 'Bienvenidos a OnlyFlans!',
+        'postres': postres,
+    }
+    
+    return render(request, 'index.html', context)
 
 def about(request):
     return render(request, 'about.html')

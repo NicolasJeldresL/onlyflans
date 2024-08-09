@@ -1,39 +1,24 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <br>
-    <h2 class="nav justify-content-center">Productos disponibles</h2>
-    <br>
-    <div class="row">
-        <div class="col-sm-4 mb-3">
+<div class="container">
+    <h1>{{ message }}</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for p in postres %}
+        <div class="col-3">
             <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto 1">
+                <img src="{{ p.url }}" class="card-img-top" alt="{{ p.name }}">
                 <div class="card-body">
-                    <h5 class="card-title">Café</h5>
-                    <p class="card-text">Cappucino, vainilla, chocolate.</p>
-                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <h5 class="card-title">{{ p.name }}</h5>
+                    <p class="card-text">{{ p.description }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 mb-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto 1">
-                <div class="card-body">
-                    <h5 class="card-title">Donut Clásica</h5>
-                    <p class="card-text">Glaceada, manjar, chocolate.</p>
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 mb-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto 1">
-                <div class="card-body">
-                    <h5 class="card-title">Donut Premium</h5>
-                    <p class="card-text">Decorada, promocional, alta calidad</p>
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
