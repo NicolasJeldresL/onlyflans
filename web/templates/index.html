@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
 
 {% block content %}
+<div class="container d-flex justify-content-center"> 
+    <h1>Flanes disponibles</h1>
+</div>
 <div class="container">
-    <h1>{{ message }}</h1>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for p in postres %}
-        <div class="col-3">
-            <div class="card">
-                <img src="{{ p.url }}" class="card-img-top" alt="{{ p.name }}">
+    <div class="row">
+        {% for flan in flanes %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{ flan.image_url }}" class="card-img-top" alt="{{ flan.name }}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ p.name }}</h5>
-                    <p class="card-text">{{ p.description }}</p>
+                    <h5 class="card-title">{{ flan.name }}</h5>
+                    <p class="card-text">{{ flan.description }}</p>
                 </div>
             </div>
         </div>

@@ -1,27 +1,40 @@
 from django.shortcuts import render
+from .models import Flan
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import ContactFormForm
 
 from django.http import HttpResponse, JsonResponse
 
 def index(request):
-    postres = [
-         {"name": "Tarta de chocolate", "description": "Deliciosa tarta de chocolate.", "url": "img/tartachocolate.jpg"},
-        {"name": "Flan de Vainilla", "description": "Suave flan de vainilla.", "url": "img/flanvainilla.jpg"},
-        {"name": "Tiramisu", "description": "Exquisito postre para el hogar.", "url": "img/tiramisu.jpg"},
-    ]
-    
-    context = {
-        'message': 'Bienvenidos a OnlyFlans!',
-        'postres': postres,
-    }
-    
-    return render(request, 'index.html', context)
+    flanes_publicos = Flan.objects.filter(is_private=False)
+
+    return render(request, 'index.html', {'flanes': flanes_publicos})
+
+def welcome(request):
+    flanes_privados = Flan.objects.filter(is_private=True)
+
+    return render(request, 'welcome.html', {'flanes': flanes_privados})
+
+def success(request):
+
+    return render(request, 'success.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactFormForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('success'))
+    else:
+        form = ContactFormForm()
+        
+    return render(request, 'contactus.html', {'form': form})
+
+
+
 
 def about(request):
     return render(request, 'about.html')
 
-def welcome(request):
-    if request.user.is_authenticated:
-        message = f"Bienvenido {request.user.username}"
-    else:
-        message = "Bienvenido cliente"
-    return render(request, 'welcome.html', {'message': message})
