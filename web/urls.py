@@ -10,5 +10,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('flan/<int:flan_id>/', views.flan_detail, name='flan_detail'),
     path('faq/', views.faq, name='faq'),
+    path('gallery/', views.gallery, name='gallery'),
     path('galeria/', views.galeria, name='galeria'),
 ]

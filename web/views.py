@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login
 from .forms import SignUpForm
+from .models import GalleryImage, FAQ
 
 def index(request):
     flanes_publicos = Flan.objects.filter(is_private=False)
@@ -54,3 +55,11 @@ def faq(request):
 
 def galeria(request):
     return render(request, 'galeria.html')
+
+def gallery(request):
+    images = GalleryImage.objects.all()
+    return render(request, 'gallery.html', {'images': images})
+
+def faq(request):
+    faqs = FAQ.objects.all()
+    return render(request, 'faq.html', {'faqs': faqs})

@@ -42,3 +42,18 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review de {self.usuario} para {self.flan}"
+    
+class GalleryImage(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='gallery/')
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
+    
+class FAQ(models.Model):
+    question = models.CharField(max_length=200)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
