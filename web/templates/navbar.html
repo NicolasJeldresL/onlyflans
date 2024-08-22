@@ -3,7 +3,10 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'galeria' %}">Galería</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contacto</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Registro</a></li>
         
         {% if user.is_authenticated %}
     <li class="nav-item">

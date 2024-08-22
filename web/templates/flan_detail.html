@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ flan.nombre }}</h2>
+
+<h3>Reseñas:</h3>
+<ul>
+    {% for review in reviews %}
+    <li>
+        <strong>{{ review.usuario.username }}</strong>: {{ review.comentario }}
+        <br>Calificación: {{ review.calificacion }}
+        <br><small>{{ review.fecha_creacion }}</small>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
