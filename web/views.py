@@ -8,6 +8,11 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login
 from .forms import SignUpForm
 from .models import GalleryImage, FAQ
+from .forms import ProfileForm
+from django.contrib.auth.forms import UserChangeForm
+from .forms import UserProfileForm
+from .models import UserProfile 
+from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
     flanes_publicos = Flan.objects.filter(is_private=False)
@@ -63,3 +68,31 @@ def gallery(request):
 def faq(request):
     faqs = FAQ.objects.all()
     return render(request, 'faq.html', {'faqs': faqs})
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile') 
+    else:
+        form = UserProfileForm(instance=request.user)
+    return render(request, 'edit_profile.html', {'form': form})
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Crear el perfil para el usuario recién creado
+            UserProfile.objects.create(user=user)  # Asegúrate de que UserProfile tenga una relación uno a uno con User
+            login(request, user)  # Iniciar sesión automáticamente después del registro
+            return redirect('index')  # Cambia 'index' por la URL deseada
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
